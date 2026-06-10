@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serviços — Zero Pontos | Recurso Administrativo de Trânsito</title>
+<meta name="description" content="Recurso de suspensão de CNH, recusa de bafômetro, multas e exame toxicológico. Mais de 30 anos de experiência. Atendimento 100% remoto em todo o Brasil.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   RESET & TOKENS
+============================================================ */
+*, *::before, *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+
+:root {
+  --offwhite:      #F8F7F4;
+  --white:         #FFFFFF;
+  --navy:          #0D1F35;
+  --navy-mid:      #162B47;
+  --navy-light:    #1E3A5C;
+  --gold:          #B8942A;
+  --gold-bright:   #C9A84C;
+  --gold-muted:    #8A6B1C;
+  --ink:           #1A1A1A;
+  --ink-mid:       #3D3D3D;
+  --ink-soft:      #6B6B6B;
+  --ink-ghost:     #9A9A9A;
+  --rule:          rgba(13,31,53,0.09);
+  --rule-dark:     rgba(255,255,255,0.08);
+  --ease:          cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--offwhite);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   SCROLL REVEAL
+============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.d1 { transition-delay: 0.05s; }
+.d2 { transition-delay: 0.12s; }
+.d3 { transition-delay: 0.19s; }
+.d4 { transition-delay: 0.26s; }
+.d5 { transition-delay: 0.33s; }
+
+/* ============================================================
+   HEADER
+============================================================ */
+#header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 300;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5.5%;
+  background: rgba(248, 247, 244, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--rule);
+  transition: box-shadow 0.35s;
+}
+
+#header.shadow {
+  box-shadow: 0 1px 32px rgba(13,31,53,0.08);
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.header-logo img {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+
+.header-logo-fallback {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.header-logo-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.header-logo-sub {
+  font-size: 8.5px;
+  font-weight: 400;
+  color: var(--gold);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+/* desktop nav */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.header-nav a {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink-mid);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.header-nav a:hover { color: var(--navy); }
+
+.header-nav a.active {
+  color: var(--navy);
+  font-weight: 500;
+}
+
+.header-nav a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0; right: 0;
+  height: 1px;
+  background: var(--gold);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-phone {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--navy);
+  text-decoration: none;
+  letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s;
+}
+
+.header-phone svg {
+  width: 15px;
+  height: 15px;
+  fill: #25D366;
+  flex-shrink: 0;
+}
+
+.header-phone:hover { color: var(--gold); }
+
+.btn-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--navy);
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+  white-space: nowrap;
+}
+
+.btn-header:hover {
+  background: transparent;
+  color: var(--navy);
+}
+
+/* hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+  z-index: 400;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--navy);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* mobile nav overlay */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  background: var(--navy);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+}
+
+.mobile-nav.open {
+  display: flex;
+  opacity: 1;
+}
+
+.mobile-nav a {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 6vw, 42px);
+  font-weight: 400;
+  color: var(--offwhite);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+
+.mobile-nav a:hover { color: var(--gold-bright); }
+.mobile-nav a.active { color: var(--gold-bright); }
+
+.mobile-nav-phone {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(248,247,244,0.6);
+  text-decoration: none;
+}
+
+.mobile-nav-phone svg {
+  width: 18px;
+  height: 18px;
+  fill: #25D366;
+}
+
+/* ============================================================
+   PAGE HERO (navy, compact)
+============================================================ */
+#page-hero {
+  position: relative;
+  background: var(--navy);
+  padding: 148px 5.5% 80px;
+  overflow: hidden;
+}
+
+.page-hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 80% at 80% 50%, rgba(30,58,92,0.6) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 60% at 10% 90%, rgba(184,148,42,0.06) 0%, transparent 55%),
+    linear-gradient(160deg, #0D1F35 0%, #0A1828 60%, #06111F 100%);
+}
+
+.page-hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.page-hero-accent-line {
+  position: absolute;
+  top: 72px;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(184,148,42,0.35) 20%, rgba(184,148,42,0.35) 80%, transparent 100%);
+}
+
+.page-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.65s 0.2s var(--ease) forwards;
+}
+
+.page-hero-eyebrow-line {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.page-hero-eyebrow span {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gold-bright);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.page-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--white);
+  max-width: 680px;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.35s var(--ease) forwards;
+}
+
+.page-hero-title em {
+  font-style: italic;
+  color: var(--gold-bright);
+}
+
+.page-hero-subtitle {
+  font-size: clamp(14px, 1.5vw, 17px);
+  font-weight: 300;
+  color: rgba(248,247,244,0.6);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.5s var(--ease) forwards;
+}
+
+.page-hero-rule {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0;
+  animation: fadeIn 0.8s 0.65s ease forwards;
+}
+
+.page-hero-breadcrumb {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(184,148,42,0.2) 40%, rgba(184,148,42,0.2) 60%, transparent 100%);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ============================================================
+   SECTION COMMONS
+============================================================ */
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.section-eyebrow-line {
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.section-eyebrow span {
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--gold-muted);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 3.5vw, 46px);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--navy);
+}
+
+.section-title em { font-style: italic; }
+
+.section-rule {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin: 24px 0;
+}
+
+/* ============================================================
+   SERVICES GRID — EXPANDED CARDS
+============================================================ */
+#servicos {
+  background: var(--offwhite);
+  padding: 100px 5.5%;
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: end;
+  margin-bottom: 72px;
+}
+
+.services-header-right {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.75;
+  max-width: 420px;
+  justify-self: end;
+}
+
+.services-grid-expanded {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+
+.service-card-expanded {
+  background: var(--white);
+  padding: 56px 48px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card-expanded::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--gold);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s var(--ease);
+}
+
+.service-card-expanded:hover::before { transform: scaleY(1); }
+.service-card-expanded:hover { background: #FAFAF8; }
+
+.service-index {
+  position: absolute;
+  top: 40px;
+  right: 44px;
+  font-family: 'Playfair Display', serif;
+  font-size: 64px;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(13,31,53,0.05);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.service-num-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--gold);
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+
+.service-title-expanded {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 500;
+  color: var(--navy);
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.service-divider {
+  width: 28px;
+  height: 1px;
+  background: var(--rule);
+  margin-bottom: 20px;
+  transition: background 0.3s;
+}
+
+.service-card-expanded:hover .service-divider { background: var(--gold); }
+
+.service-desc-expanded {
+  font-size: 14.5px;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.75;
+  margin-bottom: 28px;
+  flex: 1;
+}
+
+.service-highlight {
+  border-left: 2px solid var(--gold);
+  padding: 14px 18px;
+  margin-bottom: 32px;
+  background: rgba(184,148,42,0.04);
+}
+
+.service-highlight p {
+  font-size: 13.5px;
+  font-weight: 300;
+  color: var(--ink-mid);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.service-highlight strong {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--navy);
+}
+
+.btn-service-wpp {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 24px;
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--navy);
+  align-self: flex-start;
+  transition: background 0.25s, border-color 0.25s, color 0.25s, transform 0.2s;
+}
+
+.btn-service-wpp:hover {
+  background: transparent;
+  color: var(--navy);
+  transform: translateY(-1px);
+}
+
+.btn-service-wpp svg {
+  width: 16px;
+  height: 16px;
+  fill: #25D366;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   FAQ / ACCORDION
+============================================================ */
+#faq {
+  background: var(--white);
+  padding: 100px 5.5%;
+  border-top: 1px solid var(--rule);
+}
+
+.faq-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.faq-header {
+  position: sticky;
+  top: 96px;
+}
+
+.faq-header .section-rule {
+  margin: 24px 0;
+}
+
+.faq-header-sub {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.75;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--rule);
+}
+
+.faq-item:first-child {
+  border-top: 1px solid var(--rule);
+}
+
+.faq-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 26px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.faq-question {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(15px, 1.5vw, 18px);
+  font-weight: 400;
+  color: var(--navy);
+  line-height: 1.35;
+  flex: 1;
+  transition: color 0.2s;
+}
+
+.faq-trigger:hover .faq-question { color: var(--gold-muted); }
+
+.faq-icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.25s, background 0.25s;
+  position: relative;
+}
+
+.faq-icon::before,
+.faq-icon::after {
+  content: '';
+  position: absolute;
+  background: var(--navy);
+  transition: transform 0.35s var(--ease), opacity 0.25s;
+}
+
+.faq-icon::before {
+  width: 10px;
+  height: 1px;
+}
+
+.faq-icon::after {
+  width: 1px;
+  height: 10px;
+}
+
+.faq-item.open .faq-icon::after {
+  transform: rotate(90deg);
+  opacity: 0;
+}
+
+.faq-item.open .faq-icon {
+  border-color: var(--gold);
+  background: rgba(184,148,42,0.04);
+}
+
+.faq-item.open .faq-icon::before,
+.faq-item.open .faq-icon::after {
+  background: var(--gold);
+}
+
+.faq-body {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s var(--ease), opacity 0.4s var(--ease);
+}
+
+.faq-answer {
+  padding-bottom: 28px;
+  font-size: 14.5px;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.8;
+}
+
+.faq-answer strong {
+  font-weight: 500;
+  color: var(--ink-mid);
+}
+
+/* ============================================================
+   CTA FINAL
+============================================================ */
+#cta {
+  background: var(--navy);
+  padding: 100px 5.5%;
+  position: relative;
+  overflow: hidden;
+}
+
+#cta::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(184,148,42,0.4) 50%, transparent 100%);
+}
+
+#cta::after {
+  content: '0';
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(160px, 18vw, 280px);
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(255,255,255,0.02);
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+.cta-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 64px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-left .section-eyebrow span { color: rgba(184,148,42,0.8); }
+.cta-left .section-eyebrow-line { background: rgba(184,148,42,0.5); }
+
+.cta-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 18px;
+}
+
+.cta-title em { font-style: italic; color: var(--gold-bright); }
+
+.cta-sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(248,247,244,0.55);
+  line-height: 1.7;
+  max-width: 460px;
+}
+
+.cta-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.btn-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 40px;
+  background: var(--gold);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--gold);
+  white-space: nowrap;
+  transition: background 0.25s, transform 0.2s;
+}
+
+.btn-cta-primary:hover {
+  background: var(--gold-bright);
+  transform: translateY(-1px);
+}
+
+.btn-cta-primary svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--white);
+  flex-shrink: 0;
+}
+
+.cta-disclaimer {
+  font-size: 11px;
+  font-weight: 300;
+  color: rgba(248,247,244,0.3);
+  letter-spacing: 1px;
+  text-align: right;
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+#footer {
+  background: #07131F;
+  padding: 64px 5.5% 32px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 48px;
+  padding-bottom: 52px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 32px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+
+.footer-logo img {
+  height: 38px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+
+.footer-logo-fallback {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.footer-logo-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(248,247,244,0.7);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.footer-logo-sub {
+  font-size: 8px;
+  font-weight: 400;
+  color: rgba(184,148,42,0.6);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+.footer-brand-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(248,247,244,0.38);
+  line-height: 1.7;
+  max-width: 280px;
+}
+
+.footer-col-title {
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(248,247,244,0.3);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links a {
+  font-size: 13.5px;
+  font-weight: 300;
+  color: rgba(248,247,244,0.5);
+  text-decoration: none;
+  letter-spacing: 0.2px;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--gold-bright); }
+
+.footer-contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.footer-contact-label {
+  font-size: 9.5px;
+  font-weight: 500;
+  color: rgba(248,247,244,0.25);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+.footer-contact-value {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(248,247,244,0.6);
+  text-decoration: none;
+  transition: color 0.2s;
+  line-height: 1.4;
+}
+
+.footer-contact-value:hover { color: var(--gold-bright); }
+
+.footer-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(248,247,244,0.6);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-top: 8px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.footer-whatsapp-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: #25D366;
+}
+
+.footer-whatsapp-btn:hover {
+  border-color: rgba(255,255,255,0.25);
+  color: rgba(248,247,244,0.9);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-copy {
+  font-size: 11.5px;
+  font-weight: 300;
+  color: rgba(248,247,244,0.22);
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+}
+
+.footer-disclaimer {
+  font-size: 11px;
+  font-weight: 300;
+  color: rgba(248,247,244,0.15);
+  max-width: 420px;
+  text-align: right;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   WHATSAPP FLOAT
+============================================================ */
+.wpp-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 500;
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+  text-decoration: none;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s;
+}
+
+.wpp-float svg {
+  width: 28px;
+  height: 28px;
+  fill: white;
+}
+
+.wpp-float:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(37,211,102,0.4);
+}
+
+.wpp-float-pulse {
+  position: absolute;
+  inset: -4px;
+  border: 1px solid rgba(37,211,102,0.4);
+  animation: pulse 2.5s ease-out infinite;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); opacity: 0.8; }
+  70%  { transform: scale(1.4); opacity: 0; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* ============================================================
+   RESPONSIVE — 1024px
+============================================================ */
+@media (max-width: 1024px) {
+  .services-header { grid-template-columns: 1fr; }
+  .services-header-right { justify-self: start; }
+
+  .faq-inner { grid-template-columns: 1fr; gap: 48px; }
+  .faq-header { position: static; }
+
+  .cta-inner { grid-template-columns: 1fr; gap: 40px; }
+  .cta-right { align-items: flex-start; }
+  .cta-disclaimer { text-align: left; }
+
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+}
+
+/* ============================================================
+   RESPONSIVE — 768px
+============================================================ */
+@media (max-width: 768px) {
+  #header { padding: 0 5%; }
+  .header-nav { display: none; }
+  .header-phone { display: none; }
+  .btn-header { display: none; }
+  .hamburger { display: flex; }
+
+  #page-hero { padding: 120px 5% 64px; }
+
+  .services-grid-expanded { grid-template-columns: 1fr; }
+  .service-card-expanded { padding: 40px 28px 36px; }
+  .service-index { font-size: 44px; top: 28px; right: 24px; }
+
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .footer-disclaimer { text-align: left; }
+}
+
+/* ============================================================
+   RESPONSIVE — 480px
+============================================================ */
+@media (max-width: 480px) {
+  #servicos, #faq, #cta { padding: 72px 5%; }
+  #footer { padding: 48px 5% 28px; }
+
+  .services-header { margin-bottom: 44px; }
+  .service-card-expanded { padding: 36px 20px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     WHATSAPP FLOAT
+============================================================ -->
+<a href="https://wa.me/5547999999999?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20um%20recurso%20de%20tr%C3%A2nsito."
+   class="wpp-float" target="_blank" rel="noopener" aria-label="Falar pelo WhatsApp">
+  <span class="wpp-float-pulse"></span>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<!-- ============================================================
+     MOBILE NAV OVERLAY
+============================================================ -->
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html" onclick="closeMobileNav()">Início</a>
+  <a href="#servicos" class="active" onclick="closeMobileNav()">Serviços</a>
+  <a href="index.html#sobre" onclick="closeMobileNav()">Sobre</a>
+  <a href="contato.html" onclick="closeMobileNav()">Contato</a>
+  <a href="https://wa.me/5547999999999" class="mobile-nav-phone" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    (47) 9 9999-9999
+  </a>
+</nav>
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+<header id="header">
+  <a href="index.html" class="header-logo">
+    <img src="assets/Logo Zero Pontos sem fundo.png" alt="Zero Pontos" height="48" onerror="this.style.display='none'">
+    <div class="header-logo-fallback">
+      <span class="header-logo-name">Zero Pontos</span>
+      <span class="header-logo-sub">Recurso Administrativo</span>
+    </div>
+  </a>
+
+  <nav class="header-nav">
+    <a href="index.html">Início</a>
+    <a href="#servicos" class="active">Serviços</a>
+    <a href="index.html#sobre">Sobre</a>
+    <a href="contato.html">Contato</a>
+  </nav>
+
+  <div class="header-actions">
+    <a href="https://wa.me/5547999999999" class="header-phone" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      (47) 9 9999-9999
+    </a>
+    <a href="https://wa.me/5547999999999?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20um%20recurso." class="btn-header" target="_blank" rel="noopener">
+      Falar Agora
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============================================================
+     PAGE HERO
+============================================================ -->
+<section id="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-accent-line"></div>
+
+  <div class="page-hero-inner">
+    <div class="page-hero-eyebrow">
+      <span class="page-hero-eyebrow-line"></span>
+      <span>O que fazemos</span>
+    </div>
+
+    <h1 class="page-hero-title">
+      Recursos administrativos<br>
+      para <em>cada situação.</em>
+    </h1>
+
+    <p class="page-hero-subtitle">
+      Atendimento 100% remoto, todo o Brasil. Mais de 30 anos de experiência no sistema administrativo de trânsito — conhecemos cada prazo, cada instância, cada caminho.
+    </p>
+
+    <div class="page-hero-rule"></div>
+  </div>
+
+  <div class="page-hero-breadcrumb"></div>
+</section>
+
+<!-- ============================================================
+     SERVIÇOS — 4 CARDS EXPANDIDOS
+============================================================ -->
+<section id="servicos">
+  <div class="services-inner">
+
+    <div class="services-header">
+      <div>
+        <div class="section-eyebrow reveal">
+          <span class="section-eyebrow-line"></span>
+          <span>Áreas de Atuação</span>
+        </div>
+        <h2 class="section-title reveal d1">Cada caso<br><em>tem fundamento.</em></h2>
+        <div class="section-rule reveal d2"></div>
+      </div>
+      <p class="services-header-right reveal d2">
+        Não somos advogados. Somos especialistas que conhecem o sistema administrativo de trânsito por dentro — os prazos, as resoluções do CONTRAN, os protocolos de cada instância. Analisamos a viabilidade do seu recurso antes de qualquer contrato.
+      </p>
+    </div>
+
+    <div class="services-grid-expanded">
+
+      <!-- Card 01 -->
+      <div class="service-card-expanded reveal">
+        <span class="service-index" aria-hidden="true">01</span>
+        <span class="service-num-label">01</span>
+        <h3 class="service-title-expanded">Recurso de<br>Suspensão de CNH</h3>
+        <div class="service-divider"></div>
+        <p class="service-desc-expanded">
+          Acúmulo de pontos ou infrações graves podem levar à suspensão da habilitação. Atuamos no recurso administrativo antes da penalidade ser efetivada — nas três instâncias do processo: defesa prévia, JARI e CETRAN. O procedimento corre enquanto você segue dirigindo normalmente.
+        </p>
+        <div class="service-highlight">
+          <p><strong>Resultado comprovado:</strong> em todo nosso histórico de atendimentos, o mínimo obtido foi o arquivamento do processo por 2 a 3 anos. O motorista continua com a CNH ativa durante e após o recurso.</p>
+        </div>
+        <a href="https://wa.me/5547999999999?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20recurso%20de%20suspens%C3%A3o%20de%20CNH."
+           class="btn-service-wpp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Consultar via WhatsApp
+        </a>
+      </div>
+
+      <!-- Card 02 -->
+      <div class="service-card-expanded reveal d1">
+        <span class="service-index" aria-hidden="true">02</span>
+        <span class="service-num-label">02</span>
+        <h3 class="service-title-expanded">Recurso para<br>Recusa de Bafômetro</h3>
+        <div class="service-divider"></div>
+        <p class="service-desc-expanded">
+          A recusa ao teste de alcoolemia gera penalidades equivalentes à condução sob efeito de álcool — infração gravíssima com suspensão imediata e retenção do veículo. O que poucos sabem é que há fundamentos administrativos sólidos para contestar essa autuação dentro do prazo legal.
+        </p>
+        <div class="service-highlight">
+          <p><strong>Análise individualizada:</strong> cada caso é avaliado de forma específica. As circunstâncias da abordagem, a regularidade do procedimento policial e os prazos de notificação fazem diferença determinante no resultado do recurso.</p>
+        </div>
+        <a href="https://wa.me/5547999999999?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20recurso%20para%20recusa%20de%20baf%C3%B4metro."
+           class="btn-service-wpp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Consultar via WhatsApp
+        </a>
+      </div>
+
+      <!-- Card 03 -->
+      <div class="service-card-expanded reveal d2">
+        <span class="service-index" aria-hidden="true">03</span>
+        <span class="service-num-label">03</span>
+        <h3 class="service-title-expanded">Recurso de<br>Multas de Trânsito</h3>
+        <div class="service-divider"></div>
+        <p class="service-desc-expanded">
+          Trabalhamos com infrações de qualquer natureza — de leves a gravíssimas. Elaboramos o recurso nas três instâncias do processo administrativo: defesa prévia junto ao órgão autuador, JARI (Junta Administrativa de Recursos de Infrações) e CETRAN (Conselho Estadual de Trânsito).
+        </p>
+        <div class="service-highlight">
+          <p><strong>Sem contrato antes da análise:</strong> avaliamos cada auto de infração em busca de vícios formais, erros de lavratura e irregularidades processuais. Só seguimos em frente quando há fundamento real para o recurso.</p>
+        </div>
+        <a href="https://wa.me/5547999999999?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20recurso%20de%20multa%20de%20tr%C3%A2nsito."
+           class="btn-service-wpp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Consultar via WhatsApp
+        </a>
+      </div>
+
+      <!-- Card 04 -->
+      <div class="service-card-expanded reveal d3">
+        <span class="service-index" aria-hidden="true">04</span>
+        <span class="service-num-label">04</span>
+        <h3 class="service-title-expanded">Recurso para<br>Exame Toxicológico</h3>
+        <div class="service-divider"></div>
+        <p class="service-desc-expanded">
+          Obrigatório para motoristas profissionais das categorias C, D e E, o exame toxicológico de larga janela de detecção precisa seguir normas rígidas de coleta, custódia e análise. Irregularidades no processo ou resultados contestáveis têm base objetiva para recurso administrativo.
+        </p>
+        <div class="service-highlight">
+          <p><strong>Análise da cadeia de custódia:</strong> verificamos o credenciamento do laboratório, os protocolos de coleta e o laudo técnico. Falhas nesse processo são fundamento direto para contestação administrativa.</p>
+        </div>
+        <a href="https://wa.me/5547999999999?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20recurso%20para%20exame%20toxicol%C3%B3gico."
+           class="btn-service-wpp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Consultar via WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ — ACCORDION
+============================================================ -->
+<section id="faq">
+  <div class="faq-inner">
+
+    <div class="faq-header reveal">
+      <div class="section-eyebrow">
+        <span class="section-eyebrow-line"></span>
+        <span>Dúvidas Frequentes</span>
+      </div>
+      <h2 class="section-title">Perguntas<br><em>comuns.</em></h2>
+      <div class="section-rule"></div>
+      <p class="faq-header-sub">
+        Respondemos as questões que os motoristas mais nos fazem antes de iniciar um recurso. Se sua dúvida não estiver aqui, fale direto pelo WhatsApp.
+      </p>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item reveal d1">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-question">Preciso ir pessoalmente a algum lugar?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-body" role="region">
+          <p class="faq-answer">
+            Não. Todo o processo é <strong>100% remoto</strong>. Você envia a documentação por WhatsApp ou e-mail — foto da CNH, auto de infração ou notificação de suspensão. A partir daí, acompanha tudo à distância. Atendemos motoristas de todo o Brasil a partir de Joinville, SC, sem necessidade de comparecimento presencial em nenhuma etapa.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal d1">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-question">Quanto tempo tenho para entrar com o recurso?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-body" role="region">
+          <p class="faq-answer">
+            Os prazos variam conforme o tipo de infração e a instância, mas em geral são <strong>curtos e improrrogáveis</strong>. Para defesa prévia, o prazo costuma ser de 15 dias corridos a partir da notificação. Para JARI e CETRAN, os prazos correm a partir das decisões anteriores. Por isso recomendamos entrar em contato imediatamente ao receber qualquer notificação — cada dia conta.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal d2">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-question">Posso continuar dirigindo durante o processo de suspensão?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-body" role="region">
+          <p class="faq-answer">
+            Sim. Enquanto o recurso administrativo estiver em andamento e dentro do prazo legal, <strong>a suspensão não é efetivada</strong>. O processo corre e você mantém o direito de dirigir normalmente. Esse é um dos aspectos mais importantes do recurso administrativo — e uma das razões pelas quais o prazo de entrada é tão crítico.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal d2">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-question">Vocês garantem o resultado?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-body" role="region">
+          <p class="faq-answer">
+            Não fazemos promessas vazias. O que garantimos é <strong>análise técnica honesta antes de qualquer contrato</strong>: avaliamos o seu caso, verificamos a viabilidade real do recurso e só seguimos em frente quando há fundamento sólido. Nenhum caso é aceito sem essa análise prévia. Nosso histórico fala por si — mas cada situação é única e precisa ser tratada com seriedade.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal d3">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-question">Atendem fora de Santa Catarina?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-body" role="region">
+          <p class="faq-answer">
+            Sim. Atendemos motoristas de <strong>todo o Brasil</strong>. Como o atendimento é 100% remoto, não há restrição geográfica. Já trabalhamos com casos do Rio Grande do Sul, São Paulo, Minas Gerais, Pará, Bahia e vários outros estados. O recurso administrativo segue as normas do CONTRAN, que são federais — e conhecemos o sistema de ponta a ponta.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA FINAL
+============================================================ -->
+<section id="cta">
+  <div class="cta-inner">
+    <div class="cta-left">
+      <div class="section-eyebrow reveal">
+        <span class="section-eyebrow-line"></span>
+        <span>Consulta Gratuita</span>
+      </div>
+      <h2 class="cta-title reveal d1">
+        Recebeu notificação?<br>
+        <em>O prazo está correndo.</em>
+      </h2>
+      <p class="cta-sub reveal d2">
+        O recurso administrativo tem prazos curtos e improrrogáveis. Cada dia de espera é um dia a menos para agir. Envie seu caso agora — a análise não tem custo e não gera nenhum compromisso.
+      </p>
+    </div>
+    <div class="cta-right reveal d3">
+      <a href="https://wa.me/5547999999999?text=Ol%C3%A1%2C%20vi%20os%20servi%C3%A7os%20no%20site%20e%20preciso%20de%20uma%20an%C3%A1lise%20gratuita." class="btn-cta-primary" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Consulta Gratuita Agora
+      </a>
+      <span class="cta-disclaimer">Análise em até 24h — sem compromisso</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <img src="assets/Logo Zero Pontos sem fundo.png" alt="Zero Pontos" onerror="this.style.display='none'">
+          <div class="footer-logo-fallback">
+            <span class="footer-logo-name">Zero Pontos</span>
+            <span class="footer-logo-sub">Recurso Administrativo</span>
+          </div>
+        </a>
+        <p class="footer-brand-desc">
+          Especialistas em recursos administrativos de trânsito. Mais de 30 anos de experiência. Atendimento 100% remoto em todo o Brasil. Baseados em Joinville, SC.
+        </p>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Serviços</p>
+        <ul class="footer-links">
+          <li><a href="#servicos">Recurso de Suspensão de CNH</a></li>
+          <li><a href="#servicos">Recusa de Bafômetro</a></li>
+          <li><a href="#servicos">Recurso de Multas</a></li>
+          <li><a href="#servicos">Exame Toxicológico</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Empresa</p>
+        <ul class="footer-links">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="index.html#sobre">Sobre Paulo Cesar</a></li>
+          <li><a href="index.html#como-funciona">Como Funciona</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Contato</p>
+        <div class="footer-contact-item">
+          <span class="footer-contact-label">WhatsApp</span>
+          <a href="https://wa.me/5547999999999" class="footer-contact-value" target="_blank" rel="noopener">(47) 9 9999-9999</a>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-label">E-mail</span>
+          <a href="mailto:contato@zeropontos.com.br" class="footer-contact-value">contato@zeropontos.com.br</a>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-label">Sede</span>
+          <span class="footer-contact-value">Joinville, SC — Brasil</span>
+        </div>
+        <a href="https://wa.me/5547999999999?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20consulta%20sobre%20recurso%20de%20tr%C3%A2nsito." class="footer-whatsapp-btn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Falar pelo WhatsApp
+        </a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">
+        &copy; 2025 Zero Pontos. Todos os direitos reservados.<br>
+        CNPJ 00.000.000/0001-00 — Joinville, SC
+      </p>
+      <p class="footer-disclaimer">
+        Zero Pontos atua exclusivamente na esfera administrativa. Não presta serviços advocatícios. Os resultados apresentados referem-se ao histórico de atendimentos e não garantem resultados futuros.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── header shadow on scroll ── */
+  var header = document.getElementById('header');
+  window.addEventListener('scroll', function () {
+    header.classList.toggle('shadow', window.scrollY > 20);
+  }, { passive: true });
+
+  /* ── scroll reveal ── */
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.10, rootMargin: '0px 0px -28px 0px' });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  /* ── hamburger / mobile nav ── */
+  var hamburger = document.getElementById('hamburger');
+  var mobileNav  = document.getElementById('mobileNav');
+
+  hamburger.addEventListener('click', function () {
+    var isOpen = hamburger.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    if (isOpen) {
+      mobileNav.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    } else {
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+
+  window.closeMobileNav = function () {
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    mobileNav.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { window.closeMobileNav(); }
+  });
+
+  /* ── smooth scroll for in-page anchor links ── */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      var target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      var top = target.getBoundingClientRect().top + window.scrollY - 72;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    });
+  });
+
+  /* ── FAQ ACCORDION ──
+     Smooth animation via max-height + opacity.
+     Never uses display:none / display:block.
+  ── */
+  var faqItems = document.querySelectorAll('.faq-item');
+
+  faqItems.forEach(function (item) {
+    var trigger = item.querySelector('.faq-trigger');
+    var body    = item.querySelector('.faq-body');
+    var answer  = item.querySelector('.faq-answer');
+
+    trigger.addEventListener('click', function () {
+      var isOpen = item.classList.contains('open');
+
+      /* close all other open items */
+      faqItems.forEach(function (other) {
+        if (other !== item && other.classList.contains('open')) {
+          other.classList.remove('open');
+          other.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+          other.querySelector('.faq-body').style.maxHeight = '0px';
+          other.querySelector('.faq-body').style.opacity   = '0';
+        }
+      });
+
+      if (isOpen) {
+        item.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+        body.style.maxHeight = '0px';
+        body.style.opacity   = '0';
+      } else {
+        item.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+        body.style.maxHeight = (answer.scrollHeight + 32) + 'px';
+        body.style.opacity   = '1';
+      }
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
