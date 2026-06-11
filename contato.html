@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="assets/Logo Zero Pontos sem fundo.png">
 <title>Contato — Zero Pontos | Recurso Administrativo de Trânsito</title>
 <meta name="description" content="Entre em contato com a Zero Pontos. Análise gratuita do seu caso. Especialistas em recursos administrativos de trânsito. Atendimento remoto para todo o Brasil.">
 <link rel="canonical" href="https://zeropontos.com.br/contato.html">
@@ -11,6 +12,9 @@
 <meta property="og:title" content="Contato — Zero Pontos | Recurso Administrativo de Trânsito">
 <meta property="og:description" content="Entre em contato com a Zero Pontos. Análise gratuita do seu caso. Especialistas em recursos administrativos de trânsito. Atendimento remoto para todo o Brasil.">
 <meta property="og:url" content="https://zeropontos.com.br/contato.html">
+<meta property="og:image" content="https://zeropontos.com.br/assets/Logo%20Zero%20Pontos%20sem%20fundo.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-016D2GJR8Q"></script>
 <script>
@@ -1337,6 +1341,14 @@ body {
         </div>
 
         <div class="contact-block">
+          <div class="contact-block-label">E-mail</div>
+          <div class="contact-block-main">contato@zeropontos.com.br</div>
+          <div class="contact-block-detail">
+            Para documentos e comprovantes. Respondemos no mesmo dia útil.
+          </div>
+        </div>
+
+        <div class="contact-block">
           <div class="contact-block-label">Localização</div>
           <div class="contact-block-main">Joinville, SC</div>
           <div class="contact-block-detail">
@@ -1764,8 +1776,8 @@ body {
       msg += '*WhatsApp:* ' + (data.get('whatsapp') || '') + '\n';
       msg += '*Estado:* ' + (data.get('estado') || '') + '\n';
       msg += '*Profissão:* ' + (data.get('profissao') || '') + '\n';
-      msg += '*Situação:* ' + (data.get('servico') || '') + '\n';
-      if (data.get('urgencia')) msg += '*Quando recebeu:* ' + data.get('urgencia') + '\n';
+      msg += '*Situação:* ' + (data.get('situacao') || '') + '\n';
+      if (data.get('quando')) msg += '*Quando recebeu:* ' + data.get('quando') + '\n';
       if (data.get('mensagem') && data.get('mensagem').trim()) msg += '*Descrição:* ' + data.get('mensagem').trim() + '\n';
 
       var waUrl = 'https://wa.me/554797254794?text=' + encodeURIComponent(msg);
