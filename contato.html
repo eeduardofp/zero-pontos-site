@@ -1776,6 +1776,9 @@ body {
 
       setTimeout(function() {
         window.open(waUrl, '_blank');
+        if (typeof gtag === 'function') {
+          gtag('event', 'generate_lead', { event_category: 'formulario', event_label: 'contato' });
+        }
         formContainer.style.display = 'none';
         formSuccess.classList.add('visible');
         formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -1797,6 +1800,14 @@ body {
   });
 
 })();
+</script>
+<script>
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('a[href*="wa.me"]');
+  if (link && typeof gtag === 'function') {
+    gtag('event', 'whatsapp_click', { event_category: 'whatsapp', event_label: 'contato' });
+  }
+});
 </script>
 </body>
 </html>
