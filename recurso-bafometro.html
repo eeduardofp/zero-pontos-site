@@ -59,7 +59,7 @@
       "name": "Quais documentos preciso para iniciar o recurso de bafômetro?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Você precisa do Auto de Infração (ou Notificação de Autuação) recebido na abordagem ou pelo correio, e da CNH. Se tiver o Termo de Constatação de Embriaguez entregue na abordagem, envie também. Tudo pode ser enviado por foto no WhatsApp."
+        "text": "Fale com a gente pelo WhatsApp para entender seu caso. Fazemos a análise gratuita antes de qualquer contrato — sem necessidade de anexar documentos nesta etapa inicial."
       }
     }
   ]
@@ -253,7 +253,20 @@ body { font-family: 'DM Sans', sans-serif; background: var(--offwhite); color: v
   #service-content, #faq, #cta { padding: 72px 5%; }
   #footer { padding: 48px 5% 28px; }
 }
+/* COOKIE BANNER */
+#cookie-banner { position: fixed; left: 0; right: 0; bottom: 0; z-index: 600; background: var(--navy); border-top: 1px solid rgba(184,148,42,0.25); padding: 20px 5.5%; display: none; }
+#cookie-banner.show { display: flex; }
+.cookie-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; width: 100%; }
+.cookie-text { font-size: 13px; font-weight: 300; color: rgba(248,247,244,0.7); line-height: 1.6; max-width: 640px; }
+.cookie-text a { color: var(--gold-bright); text-decoration: underline; }
+.cookie-actions { display: flex; gap: 12px; flex-shrink: 0; }
+.cookie-btn { padding: 10px 22px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border: 1px solid var(--gold); background: var(--gold); color: var(--white); transition: background 0.2s, color 0.2s; }
+.cookie-btn:hover { background: var(--gold-bright); border-color: var(--gold-bright); }
+.cookie-btn.decline { background: transparent; color: rgba(248,247,244,0.6); border-color: rgba(248,247,244,0.2); }
+.cookie-btn.decline:hover { color: var(--white); border-color: rgba(248,247,244,0.4); }
+@media (max-width: 768px) { .cookie-inner { flex-direction: column; align-items: flex-start; } .cookie-actions { width: 100%; } .cookie-btn { flex: 1; } }
 </style>
+
 </head>
 <body>
 
@@ -419,7 +432,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--offwhite); color: v
           <span class="faq-icon" aria-hidden="true"></span>
         </button>
         <div class="faq-body" role="region">
-          <p class="faq-answer">Você precisa do <strong>Auto de Infração</strong> (ou Notificação de Autuação) recebido na abordagem ou pelo correio, e da CNH. Se tiver o Termo de Constatação de Embriaguez entregue na abordagem, envie também. Tudo pode ser enviado por foto no WhatsApp.</p>
+          <p class="faq-answer">Não é preciso enviar nada de início. <strong>Fale com a gente pelo WhatsApp</strong> e conte o que aconteceu — fazemos a análise do caso gratuitamente antes de qualquer contrato.</p>
         </div>
       </div>
     </div>
@@ -475,6 +488,8 @@ body { font-family: 'DM Sans', sans-serif; background: var(--offwhite); color: v
           <li><a href="servicos.html">Todos os Serviços</a></li>
           <li><a href="index.html#sobre">Sobre Paulo Cesar</a></li>
           <li><a href="contato.html">Contato</a></li>
+          <li><a href="privacidade.html">Política de Privacidade</a></li>
+          <li><a href="termos.html">Termos de Uso</a></li>
         </ul>
       </div>
       <div>
@@ -495,7 +510,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--offwhite); color: v
     </div>
     <div class="footer-bottom">
       <p class="footer-copy">&copy; 2026 Zero Pontos. Todos os direitos reservados.<br>CNPJ 43.147.986/0001-30 — Joinville, SC</p>
-      <p class="footer-disclaimer">Zero Pontos atua exclusivamente na esfera administrativa. Não presta serviços advocatícios. Os resultados apresentados referem-se ao histórico de atendimentos e não garantem resultados futuros.</p>
+      <p class="footer-disclaimer">Zero Pontos é uma empresa privada, sem vínculo com DETRAN, CONTRAN ou qualquer órgão público. Atua exclusivamente na esfera administrativa. Não presta serviços advocatícios. Os resultados apresentados referem-se ao histórico de atendimentos e não garantem resultados futuros.</p>
     </div>
   </div>
 </footer>
@@ -539,6 +554,28 @@ document.addEventListener('click', function(e) {
   var link = e.target.closest('a[href*="wa.me"]');
   if (link && typeof gtag === 'function') { gtag('event', 'whatsapp_click', { event_category: 'whatsapp', event_label: 'recurso-bafometro' }); }
 });
+</script>
+
+<div id="cookie-banner">
+  <div class="cookie-inner">
+    <p class="cookie-text">
+      Usamos cookies do Google Analytics para entender como você usa nosso site. Ao continuar, você concorda com nossa <a href="privacidade.html">Política de Privacidade</a>.
+    </p>
+    <div class="cookie-actions">
+      <button class="cookie-btn decline" onclick="cookieDecline()">Recusar</button>
+      <button class="cookie-btn" onclick="cookieAccept()">Aceitar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var banner = document.getElementById('cookie-banner');
+  var consent = localStorage.getItem('zp_cookie_consent');
+  if (!consent) { setTimeout(function(){ banner.classList.add('show'); }, 600); }
+  window.cookieAccept = function(){ localStorage.setItem('zp_cookie_consent','accepted'); banner.classList.remove('show'); };
+  window.cookieDecline = function(){ localStorage.setItem('zp_cookie_consent','declined'); banner.classList.remove('show'); };
+})();
 </script>
 </body>
 </html>
