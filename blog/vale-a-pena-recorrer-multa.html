@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src https://www.google-analytics.com; frame-ancestors 'none';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.g.doubleclick.net https://www.google.com; frame-ancestors 'none';">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
@@ -281,6 +281,7 @@ h1 { font-family: 'Playfair Display', serif; font-size: clamp(29px,4.1vw,48px); 
 <nav class="mobile-nav" id="mobileNav">
   <a href="../index.html" onclick="closeMobileNav()">Início</a>
   <a href="../servicos.html" onclick="closeMobileNav()">Serviços</a>
+  <a href="../index.html#sobre" onclick="closeMobileNav()">Sobre</a>
   <a href="index.html" onclick="closeMobileNav()">Blog</a>
   <a href="../contato.html" onclick="closeMobileNav()">Contato</a>
   <a href="https://wa.me/5547997254794" class="mobile-nav-phone" target="_blank" rel="noopener noreferrer">
@@ -300,6 +301,7 @@ h1 { font-family: 'Playfair Display', serif; font-size: clamp(29px,4.1vw,48px); 
   <nav class="header-nav">
     <a href="../index.html">Início</a>
     <a href="../servicos.html">Serviços</a>
+    <a href="../index.html#sobre">Sobre</a>
     <a href="index.html" class="active">Blog</a>
     <a href="../contato.html">Contato</a>
   </nav>
