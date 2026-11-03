@@ -21,6 +21,23 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <!-- Google tag (gtag.js) -->
+<!-- Exclusao de trafego interno. Abrir o site com ?_noga=1 marca este navegador
+     como interno e desliga o Analytics nele de forma permanente. ?_noga=0 desfaz.
+     Precisa rodar ANTES do gtag.js: e o opt-out oficial do Google. -->
+<script>
+  (function () {
+    try {
+      var p = new URLSearchParams(location.search);
+      if (p.has('_noga')) {
+        if (p.get('_noga') === '0') localStorage.removeItem('zp_noga');
+        else localStorage.setItem('zp_noga', '1');
+      }
+      if (localStorage.getItem('zp_noga') === '1') {
+        window['ga-disable-G-016D2GJR8Q'] = true;
+      }
+    } catch (e) {}
+  })();
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-016D2GJR8Q"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
